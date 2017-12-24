@@ -6,7 +6,11 @@ class BlogsController < ApplicationController
   end
   
   def new
-    @blog = Blog.new
+    if params[:back]
+      @blog = Blog.new(blog_params)
+    else
+      @blog = Blog.new
+    end
   end
   
   def show
@@ -33,6 +37,16 @@ class BlogsController < ApplicationController
     else
       render 'edit'
     end
+  end
+  
+  def destroy
+    @blog.destroy
+    redirect_to blogs_path, notice:"ブログを削除しました！"
+  end
+  
+  def confirm
+    @blog = Blog.new(blog_params)
+    render :new if @blog.invalid?
   end
   
  private
