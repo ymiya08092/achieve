@@ -1,4 +1,5 @@
-class TopsController < ApplicationController
+class BlogsController < ApplicationController
+  before_action :set_blog,only: [:show, :edit, :update]
   
   def index
     @blogs = Blog.all
@@ -43,4 +44,3 @@ class TopsController < ApplicationController
     @blog = Blog.find(params[:id])
   end
 end
-
